@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Coffee Payment</title>
+</head>
+<body>
+
+<h2>Complete Your Payment</h2>
+
+<button id="rzp-button">Pay ₹199</button>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+var options = {
+    "key": "{{ razorpay_key }}",
+
+    "amount": "{{ amount }}",
+
+    "currency": "INR",
+
+    "name": "Coffee Store",
+
+    "description": "Coffee Purchase",
+
+    "order_id": "{{ payment.id }}",
+
+    "handler": function (response){
+
+        var form = document.createElement("form");
+        form.method = "POST";
+        form.action = "{% url 'success' %}";
+
+        var csrf = document.createElement("input");
+        csrf.type = "hidden";
+        csrf.name = "csrfmiddlewaretoken";
+        csrf.value = "{{ csrf_token }}";
+        form.appendChild(csrf);
+
+        var order = document.createElement("input");
+        order.type = "hidden";
+        order.name = "razorpay_order_id";
+        order.value = response.razorpay_order_id;
+        form.appendChild(order);
+
+        var payment = document.createElement("input");
+        payment.type = "hidden";
+        payment.name = "razorpay_payment_id";
+        payment.value = response.razorpay_payment_id;
+        form.appendChild(payment);
+
+        var signature = document.createElement("input");
+        signature.type = "hidden";
+        signature.name = "razorpay_signature";
+        signature.value = response.razorpay_signature;
+        form.appendChild(signature);
+
+        document.body.appendChild(form);
+
+        form.submit();
+
+    }
+
+};
+
+var rzp = new Razorpay(options);
+
+document.getElementById("rzp-button").onclick = function(e){
+
+    rzp.open();
+
+    e.preventDefault();
+
+}
+
+</script>
+
+</body>
+</html>

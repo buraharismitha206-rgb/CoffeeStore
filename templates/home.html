@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Coffee Store
+{% endblock %}
+
+{% block content %}
+
+<h1 class="title text-center mb-5">
+    ☕ Premium Coffee Collection
+</h1>
+
+<div class="row g-4">
+
+    <!-- Coffee 1 -->
+    <div class="col-lg-4 col-md-6">
+        <div class="card shadow">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600" class="card-img-top">
+            <div class="card-body text-center">
+                <span class="badge bg-danger">Best Seller</span>
+                <h3 class="mt-3">Cappuccino</h3>
+                <div class="rating text-warning fs-5">★★★★★</div>
+                <p>Rich espresso with steamed milk and foam.</p>
+                <h4 class="text-success">₹199</h4>
+                <a href="{% url 'payment' %}" class="btn btn-success w-100">🛒 Buy Now</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coffee 2 -->
+    <div class="col-lg-4 col-md-6">
+        <div class="card shadow">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600" class="card-img-top">
+            <div class="card-body text-center">
+                <span class="badge bg-primary">Popular</span>
+                <h3 class="mt-3">Latte</h3>
+                <div class="rating text-warning fs-5">★★★★★</div>
+                <p>Smooth espresso mixed with creamy steamed milk.</p>
+                <h4 class="text-success">₹179</h4>
+                <a href="{% url 'payment' %}" class="btn btn-success w-100">🛒 Buy Now</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coffee 3 -->
+    <div class="col-lg-4 col-md-6">
+        <div class="card shadow">
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600" class="card-img-top">
+            <div class="card-body text-center">
+                <span class="badge bg-warning text-dark">Hot</span>
+                <h3 class="mt-3">Espresso</h3>
+                <div class="rating text-warning fs-5">★★★★★</div>
+                <p>Strong and aromatic Italian espresso shot.</p>
+                <h4 class="text-success">₹149</h4>
+                <a href="{% url 'payment' %}" class="btn btn-success w-100">🛒 Buy Now</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coffee 4 -->
+    <div class="col-lg-4 col-md-6">
+        <div class="card shadow">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=600" class="card-img-top">
+            <div class="card-body text-center">
+                <span class="badge bg-info">Special</span>
+                <h3 class="mt-3">Mocha</h3>
+                <div class="rating text-warning fs-5">★★★★★</div>
+                <p>Chocolate-flavoured coffee with whipped cream.</p>
+                <h4 class="text-success">₹229</h4>
+                <a href="{% url 'payment' %}" class="btn btn-success w-100">🛒 Buy Now</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coffee 5 -->
+    <div class="col-lg-4 col-md-6">
+        <div class="card shadow">
+            <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600" class="card-img-top">
+            <div class="card-body text-center">
+                <span class="badge bg-success">Fresh</span>
+                <h3 class="mt-3">Americano</h3>
+                <div class="rating text-warning fs-5">★★★★★</div>
+                <p>Espresso blended with hot water for a rich taste.</p>
+                <h4 class="text-success">₹169</h4>
+                <a href="{% url 'payment' %}" class="btn btn-success w-100">🛒 Buy Now</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coffee 6 -->
+    <div class="col-lg-4 col-md-6">
+        <div class="card shadow">
+            <img src="https://images.unsplash.com/photo-1459755486867-b55449bb39ff?w=600" class="card-img-top">
+            <div class="card-body text-center">
+                <span class="badge bg-secondary">Cold</span>
+                <h3 class="mt-3">Cold Coffee</h3>
+                <div class="rating text-warning fs-5">★★★★★</div>
+                <p>Refreshing chilled coffee topped with ice cream.</p>
+                <h4 class="text-success">₹249</h4>
+                <a href="{% url 'payment' %}" class="btn btn-success w-100">🛒 Buy Now</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

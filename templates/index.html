@@ -1,0 +1,34 @@
+{% extends 'base.html' %} <!-- optional, only if you use template inheritance -->
+
+{% block content %}
+<div class="container">
+    <h2>Buy Coffee</h2>
+    <p>Total Amount: ₹{{ amount }}</p>
+
+    <!-- 1. YOUR BUY NOW BUTTON (Make sure the id matches 'buy-now-btn') -->
+    <button id="buy-now-btn" class="btn btn-primary">Buy Now</button>
+</div>
+
+<!-- 2. RAZORPAY SCRIPT (Include right before closing </body> or at bottom of file) -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+  var options = {
+      "key": "{{ RAZORPAY_KEY_ID }}", // Passed from views.py context
+      "amount": "{{ amount }}",
+      "currency": "INR",
+      "name": "Coffee Store",
+      "order_id": "{{ razorpay_order_id }}",
+      "handler": function (response){
+          alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+      }
+  };
+
+  var rzp1 = new Razorpay(options);
+
+  document.getElementById('buy-now-btn').onclick = function(e){
+      rzp1.open();
+      e.preventDefault();
+  }
+</script>
+{% endblock %}
