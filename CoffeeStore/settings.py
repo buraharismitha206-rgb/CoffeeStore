@@ -125,7 +125,6 @@ STATICFILES_DIRS = [
 ]
 
 import os
-
-# Razorpay API Keys (Fetched from Render Environment Variables)
-#RAZORPAY_KEY_ID = os.getenv('RAZORPAY_KEY_ID', 'rzp_test_TIBaLP7wbDusUx')
-#RAZORPAY_KEY_SECRET = os.getenv('RAZORPAY_KEY_SECRET', '328XHYNQ9NkdyJqxET3Cig7i')
+#Razorpay API Keys (Fetched from Render Environment Variables)
+RAZORPAY_KEY_ID = os.getenv('RAZORPAY_KEY_ID', 'rzp_test_TJaxJ4OSHvwK0n')
+RAZORPAY_KEY_SECRET = os.getenv('RAZORPAY_KEY_SECRET', 'yBPpCH3dsSL50e6LX4ozI0tw')

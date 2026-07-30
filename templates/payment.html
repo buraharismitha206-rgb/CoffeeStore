@@ -1,80 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Coffee Payment</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Store Payment</title>
 </head>
 <body>
 
-<h2>Complete Your Payment</h2>
+    <h2>Complete Your Payment</h2>
 
-<button id="rzp-button">Pay ₹199</button>
+    <button id="rzp-button">Pay ₹199</button>
 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-<script>
+    <script>
 
-var options = {
-    "key": "{{ razorpay_key }}",
+        var options = {
+            key: "{{ razorpay_key }}",
+            amount: "{{ amount }}",
+            currency: "INR",
+            name: "Coffee Store",
+            description: "Coffee Purchase",
+            order_id: "{{ payment.id }}",
 
-    "amount": "{{ amount }}",
+            handler: function (response) {
 
-    "currency": "INR",
+                var form = document.createElement("form");
+                form.method = "POST";
+                form.action = "{% url 'success' %}";
 
-    "name": "Coffee Store",
+                // CSRF Token
+                var csrf = document.createElement("input");
+                csrf.type = "hidden";
+                csrf.name = "csrfmiddlewaretoken";
+                csrf.value = "{{ csrf_token }}";
+                form.appendChild(csrf);
 
-    "description": "Coffee Purchase",
+                // Razorpay Order ID
+                var order = document.createElement("input");
+                order.type = "hidden";
+                order.name = "razorpay_order_id";
+                order.value = response.razorpay_order_id;
+                form.appendChild(order);
 
-    "order_id": "{{ payment.id }}",
+                // Razorpay Payment ID
+                var payment = document.createElement("input");
+                payment.type = "hidden";
+                payment.name = "razorpay_payment_id";
+                payment.value = response.razorpay_payment_id;
+                form.appendChild(payment);
 
-    "handler": function (response){
+                // Razorpay Signature
+                var signature = document.createElement("input");
+                signature.type = "hidden";
+                signature.name = "razorpay_signature";
+                signature.value = response.razorpay_signature;
+                form.appendChild(signature);
 
-        var form = document.createElement("form");
-        form.method = "POST";
-        form.action = "{% url 'success' %}";
+                document.body.appendChild(form);
+                form.submit();
+            },
 
-        var csrf = document.createElement("input");
-        csrf.type = "hidden";
-        csrf.name = "csrfmiddlewaretoken";
-        csrf.value = "{{ csrf_token }}";
-        form.appendChild(csrf);
+            theme: {
+                color: "#3399cc"
+            }
+        };
 
-        var order = document.createElement("input");
-        order.type = "hidden";
-        order.name = "razorpay_order_id";
-        order.value = response.razorpay_order_id;
-        form.appendChild(order);
+        var rzp = new Razorpay(options);
 
-        var payment = document.createElement("input");
-        payment.type = "hidden";
-        payment.name = "razorpay_payment_id";
-        payment.value = response.razorpay_payment_id;
-        form.appendChild(payment);
+        document.getElementById("rzp-button").onclick = function (e) {
+            rzp.open();
+            e.preventDefault();
+        };
 
-        var signature = document.createElement("input");
-        signature.type = "hidden";
-        signature.name = "razorpay_signature";
-        signature.value = response.razorpay_signature;
-        form.appendChild(signature);
-
-        document.body.appendChild(form);
-
-        form.submit();
-
-    }
-
-};
-
-var rzp = new Razorpay(options);
-
-document.getElementById("rzp-button").onclick = function(e){
-
-    rzp.open();
-
-    e.preventDefault();
-
-}
-
-</script>
+    </script>
 
 </body>
 </html>
